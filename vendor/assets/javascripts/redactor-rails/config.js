@@ -9,7 +9,14 @@ window.init_redactor = function(){
     { "imageUpload":"/redactor_rails/pictures?" + params,
       "imageGetJson":"/redactor_rails/pictures",
       "path":"/assets/redactor-rails",
-      "css":"style.css"}
+      "css":"style.css",
+      "buttons": [ 'bold', 'italic', 'deleted',
+        'unorderedlist', 'orderedlist', 'outdent', 'indent', 
+        'image', 'video', 'file', 'link',
+        'alignment', 'horizontalrule', 
+        'formatting', 
+        'html']
+    }
   );
 }
 
