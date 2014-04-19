@@ -1,5 +1,4 @@
-class RedactorRails::PicturesController < ApplicationController
-  before_filter :redactor_authenticate_user!
+class RedactorRails::PicturesController < RedactorRails::RedactorController
 
   def index
     condition = {}
@@ -24,16 +23,5 @@ class RedactorRails::PicturesController < ApplicationController
       render nothing: true
     end
   end
-
-  private
   
-  def has_devise_user?
-    @_has_devise_user ||= RedactorRails.picture_model.new.respond_to?(RedactorRails.devise_user)
-  end
-
-  def redactor_authenticate_user!
-    if has_devise_user?
-      super
-    end
-  end
 end

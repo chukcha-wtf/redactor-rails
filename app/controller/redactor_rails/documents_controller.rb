@@ -1,10 +1,10 @@
 class RedactorRails::DocumentsController < ApplicationController
-  before_filter :redactor_authenticate_user!
 
   def index
-    @documents = RedactorRails.document_model.where(
-        RedactorRails.document_model.new.respond_to?(RedactorRails.devise_user) ? { RedactorRails.devise_user_key => redactor_current_user.id } : { })
-    render json: @documents.to_json
+    condition = {}
+    condition = { RedactorRails.devise_user_key => redactor_current_user.id } if has_devise_user?
+    @documents = RedactorRails.document_model.where(condition)
+    render json: @documents
   end
 
   def create
@@ -18,17 +18,16 @@ class RedactorRails::DocumentsController < ApplicationController
     end
 
     if @document.save
-      render text: { filelink: @document.url, filename: @document.filename }.to_json
+      render json: { filelink: @document.url, filename: @document.filename }
     else
       render nothing: true
     end
   end
 
   private
-
-  def redactor_authenticate_user!
-    if RedactorRails.document_model.new.respond_to?(RedactorRails.devise_user)
-      super
-    end
+  
+  def has_devise_user?
+    @_has_devise_user ||= RedactorRails.document_model.new.respond_to?(RedactorRails.devise_user)
   end
+  
 end
