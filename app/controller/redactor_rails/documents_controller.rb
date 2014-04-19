@@ -4,7 +4,7 @@ class RedactorRails::DocumentsController < ApplicationController
   def index
     @documents = RedactorRails.document_model.where(
         RedactorRails.document_model.new.respond_to?(RedactorRails.devise_user) ? { RedactorRails.devise_user_key => redactor_current_user.id } : { })
-    render :json => @documents.to_json
+    render json: @documents.to_json
   end
 
   def create
@@ -18,9 +18,9 @@ class RedactorRails::DocumentsController < ApplicationController
     end
 
     if @document.save
-      render :text => { :filelink => @document.url, :filename => @document.filename }.to_json
+      render text: { filelink: @document.url, filename: @document.filename }.to_json
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 

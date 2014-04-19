@@ -28,7 +28,7 @@ module RedactorRails
           end
         end
 
-        # process :quality => 85
+        # process quality: 85
         def quality(percentage)
           manipulate! do |img|
             img.quality(percentage)

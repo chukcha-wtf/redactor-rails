@@ -25,8 +25,8 @@ module RedactorRails
 
           def as_json(options = nil)
             options = {
-              :methods => as_json_methods,
-              :root => false
+              methods: as_json_methods,
+              root: false
             }
 
             super options

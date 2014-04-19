@@ -6,11 +6,11 @@ module Redactor
       include ::Rails::Generators::Migration
       desc "Generates migration for Tag and Tagging models"
 
-      class_option :orm, :type => :string, :default => "active_record",
-  :desc => "Backend processor for upload support"
+      class_option :orm, type: :string, default: "active_record",
+  desc: "Backend processor for upload support"
 
-      class_option :backend, :type => :string, :default => 'carrierwave',
-  :desc => "carrierwave(default)"
+      class_option :backend, type: :string, default: 'carrierwave',
+  desc: "carrierwave(default)"
 
       def self.source_root
   @source_root ||= File.expand_path(File.join(File.dirname(__FILE__), 'templates'))
