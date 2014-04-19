@@ -2,9 +2,10 @@ class RedactorRails::PicturesController < ApplicationController
   before_filter :redactor_authenticate_user!
 
   def index
-    @pictures = RedactorRails.picture_model.where(
-        RedactorRails.picture_model.new.respond_to?(RedactorRails.devise_user) ? { RedactorRails.devise_user_key => redactor_current_user.id } : { })
-    render json: @pictures.to_json
+    condition = {}
+    condition = { RedactorRails.devise_user_key => redactor_current_user.id } if has_devise_user?
+    @pictures = RedactorRails.picture_model.where(condition)
+    render json: @pictures
   end
 
   def create
@@ -25,9 +26,13 @@ class RedactorRails::PicturesController < ApplicationController
   end
 
   private
+  
+  def has_devise_user?
+    @_has_devise_user ||= RedactorRails.picture_model.new.respond_to?(RedactorRails.devise_user)
+  end
 
   def redactor_authenticate_user!
-    if RedactorRails.picture_model.new.respond_to?(RedactorRails.devise_user)
+    if has_devise_user?
       super
     end
   end
