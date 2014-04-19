@@ -2,7 +2,7 @@ class RedactorRails::DocumentsController < ApplicationController
 
   def index
     condition = {}
-    condition = { RedactorRails.devise_user_key => redactor_current_user.id } if has_devise_user?
+    condition[RedactorRails.devise_user_key] = redactor_current_user.id  if has_devise_user?
     @documents = RedactorRails.document_model.where(condition)
     render json: @documents
   end
@@ -12,7 +12,7 @@ class RedactorRails::DocumentsController < ApplicationController
 
     file = params[:file]
     @document.data = RedactorRails::Http.normalize_param(file, request)
-    if @document.respond_to?(RedactorRails.devise_user)
+    if has_devise_user?
       @document.send("#{RedactorRails.devise_user}=", redactor_current_user)
       @document.assetable = redactor_current_user
     end
