@@ -1,3 +1,5 @@
+require 'redactor_rails/redactor_controller'
+
 class RedactorRails::PicturesController < RedactorRails::RedactorController
 
   def index
