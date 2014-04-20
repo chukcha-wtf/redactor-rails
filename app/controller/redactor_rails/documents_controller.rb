@@ -1,6 +1,6 @@
 require 'redactor_rails/redactor_controller'
 
-class RedactorRails::DocumentsController < ApplicationController
+class RedactorRails::DocumentsController < RedactorRails::RedactorController
 
   def index
     condition = {}
