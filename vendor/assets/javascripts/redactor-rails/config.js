@@ -10,6 +10,7 @@ window.init_redactor = function(){
       "imageGetJson":"/redactor_rails/pictures",
       "path":"/assets/redactor-rails",
       "css":"style.css",
+      "convertDivs": false,
       "buttons": [ 'bold', 'italic', 'deleted',
         'unorderedlist', 'orderedlist', 'outdent', 'indent', 
         'image', 'video', 'file', 'link',
